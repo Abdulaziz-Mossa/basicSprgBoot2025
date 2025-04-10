@@ -27,5 +27,17 @@ public class DftRestController {
         list.add(param2);
         return list;
     }
-
+    @RequestMapping("/assignment2")
+    public Map<String,Object> assignment2(){
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("key1","value1");
+        map.put("key2","value2");
+        return map;
+    }
+    @RequestMapping("/assignment3")
+    public int assignment3(@RequestParam int num1,@RequestParam int num2 ,@RequestParam int num3){
+        int sum =0;
+        sum= num1+ num2+ num3;
+        return sum;
+    }
 }
