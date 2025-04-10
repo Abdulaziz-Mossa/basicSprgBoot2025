@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+  <title>detail</title>
+      <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+</head>
+<body>
+details <br>
+
+id:<input id="input_id" type="number"></input><br>
+author:<input id="input_author" type="text"></input><br>
+content:<input id="input_content" type="text"></input><br>
+title:<input id="input_title" type="text"></input><br>
+      <button onclick="get_detail()">get detail</button>
+      <button onclick="get_update()">update</button>
+      <button onclick="get_delete()">delete</button>
+    <script>
+      function get_detail() {
+          $.ajax({
+              url: "/api/board/detail",
+              method: "GET",
+              data: {
+                  id: $("#input_id").val()
+              },
+              success: (data, status, xhr) => {
+                  //alert(JSON.stringify(data));
+                  $("#input_author").val(data["author"]);
+                  $("#input_content").val(data["content"]);
+                  $("#input_title").val(data["title"]);
+              },
+              error: (data, status, xhr) => {
+                  alert(JSON.stringify(data));
+              },
+          });
+      }
+      function get_update() {
+          $.ajax({
+                  url: "/api/board/update",
+                  method: "GET",
+                  data: {
+                      id: $("#input_id").val(),
+                      author: $("#input_author").val(),
+                      content:$("#input_content").val(),
+                      title:  $("#input_title").val()
+                  },
+                  success: (data, status, xhr) => {
+                      //alert(JSON.stringify(data));
+
+                  },
+                  error: (data, status, xhr) => {
+                      alert(JSON.stringify(data));
+                  },
+          });
+
+      }
+      function get_delete() {
+          $.ajax({
+              url: "/api/board/delete",
+              method: "GET",
+              data: {
+                  id: $("#input_id").val(),
+                  author: $("#input_author").val(),
+                  content:$("#input_content").val(),
+                  title:  $("#input_title").val()
+              },
+              success: (data, status, xhr) => {
+                  //alert(JSON.stringify(data));
+
+              },
+              error: (data, status, xhr) => {
+                  alert(JSON.stringify(data));
+              },
+          });
+
+      }
+    </script>
+</body>
+</html>
