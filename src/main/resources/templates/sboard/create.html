@@ -2,20 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>create post</title>
+    <title>create sboard</title>
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 </head>
 <body>
-create post<br>
+create sboard<br>
 title:
 <input id ="input_title" class="input_value" type="text"></input><br>
 content:
 <input id="input_content" class="input_value" type="text"></input><br>
 author:
 <input id="input_author" class="input_value" type="text"></input><br>
-<button onclick="post_create()">create post</button>
+<button onclick="sboard_create()">create sboard</button>
 <script>
-    function post_create() {
+    function sboard_create() {
         let params ={};
         let input_value=$(".input_value");
         for(let each of input_value){
@@ -24,7 +24,7 @@ author:
             params[eachKey]= $(each).val();
         }
         $.ajax({
-            url: "/api/post/create",
+            url: "/api/sboard/create",
             method: "GET",
             data: params,
             success: (data, status, xhr) => {

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>list sboard</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+</head>
+<body>
+list sboard
+<script>
+    $.ajax({
+        url: "/api/sboard/list",
+        method: "GET",
+        data: {
+        },
+        success: (data, status, xhr)=>{
+            alert(JSON.stringify(data));
+        },
+        error: (data, status, xhr)=>{
+            alert(JSON.stringify(data));
+        },
+    });
+</script>
+</body>
+</html>

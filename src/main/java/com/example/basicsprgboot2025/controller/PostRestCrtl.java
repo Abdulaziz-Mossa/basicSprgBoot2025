@@ -1,6 +1,8 @@
 package com.example.basicsprgboot2025.controller;
 
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -15,8 +17,15 @@ public class PostRestCrtl {
     List<Map<String,Object>> list=new ArrayList<Map<String, Object>>();
 
     @RequestMapping("/create")
-    public Map<String,Object> create(String title,String content, String author){
-        Map<String,Object> post=new HashMap<>();
+    public Map<String,Object> create(@RequestParam Map<String, Object> map){
+        if(map.get("title") == null || (map.get("title")+ "").isEmpty()) {
+        throw new RuntimeException("no param!");
+        }
+        String title =(String) map.get("title");
+        String content =(String) map.get("content");
+        String author =(String) map.get("author");
+
+        Map<String,Object> post=new HashMap<String , Object>();
         post.put("title",title);
         post.put("content",content);
         post.put("author",author);
@@ -45,6 +54,7 @@ public class PostRestCrtl {
 
     @RequestMapping("/delete")
     public void delete(String id){
+        System.out.println(id);
         Map<String , Object> post=detail(id);
         post.remove("content");
         post.remove("author");
@@ -55,9 +65,10 @@ public class PostRestCrtl {
     public List<Map<String, Object>> list() {
         return list;
     }
-    @RequestMapping("detail")
-    public Map<String, Object> detail(String id){
+    @RequestMapping("/detail/{id}")
+    public Map<String, Object> detail(@PathVariable String id){
         for(Map<String,Object> each : list){
+
             if((each.get("id")+"").equals(id)){
                 return each;
             }

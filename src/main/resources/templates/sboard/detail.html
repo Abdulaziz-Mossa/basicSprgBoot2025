@@ -2,51 +2,32 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>post detail</title>
+    <title>sboard detail</title>
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 </head>
 <body>
-post details <br>
-id:
-<input class="input_value" id ="input_id" type="text"></input><br>
-title:
-<input class="input_value" id ="input_title" type="text"></input><br>
-content:
-<input class="input_value" id="input_content" type="text"></input><br>
-author:
-<input  class="input_value" id="input_author" type="text"></input><br>
+sboard details <br>
 
+id:<input id="input_id" type="number"></input><br>
+author:<input id="input_author" type="text"></input><br>
+content:<input id="input_content" type="text"></input><br>
+title:<input id="input_title" type="text"></input><br>
+<button onclick="get_detail()">get detail</button>
+<button onclick="get_update()">update</button>
 <button onclick="get_delete()">delete</button>
-<button onclick="get_detail()">detail</button>
-<button onclick="get_update()">update post</button>
 <script>
-    $( document ).ready(function() {
-        console.log( "ready!" );
-        get_detail();
-    });
-    //extract id from url
-    let tempHref = window.location.href;
+    let tempHref= window.location.href;
     let tempArray = tempHref.split("/");
-    let tempId =tempArray[tempArray.length-1]
-
-    //extract parameters from input class
-    let params ={};
-    let input_value=$(".input_value");
-    for(let each of input_value){
-        let eachId= $(each).attr("id");
-        let eachKey=eachId.replace("input_","")
-        params[eachKey]= $(each).val();
-    }
-
+    let tempId = tempArray[tempArray.length - 1];
     function get_detail() {
         $.ajax({
-            url: "/api/post/detail/"+tempId,
+            url: "/api/sboard/detail",
             method: "GET",
             data: {
+                id: tempId
             },
             success: (data, status, xhr) => {
                 //alert(JSON.stringify(data));
-                $("#input_id").val(data["id"]);
                 $("#input_author").val(data["author"]);
                 $("#input_content").val(data["content"]);
                 $("#input_title").val(data["title"]);
@@ -58,9 +39,14 @@ author:
     }
     function get_update() {
         $.ajax({
-            url: "/api/post/update",
+            url: "/api/sboard/update",
             method: "GET",
-            data: params,
+            data: {
+                id: tempId,
+                author: $("#input_author").val(),
+                content:$("#input_content").val(),
+                title:  $("#input_title").val()
+            },
             success: (data, status, xhr) => {
                 //alert(JSON.stringify(data));
 
@@ -73,9 +59,14 @@ author:
     }
     function get_delete() {
         $.ajax({
-            url: "/api/post/delete",
+            url: "/api/sboard/delete",
             method: "GET",
-            data: {id:$("#input_id").val()},
+            data: {
+                id: tempId,
+                author: $("#input_author").val(),
+                content:$("#input_content").val(),
+                title:  $("#input_title").val()
+            },
             success: (data, status, xhr) => {
                 //alert(JSON.stringify(data));
 
