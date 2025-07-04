@@ -1,6 +1,8 @@
 package com.example.basicsprgboot2025.controller;
 
-import com.example.basicsprgboot2025.controller.service.SboardService;
+import com.example.basicsprgboot2025.domain.Sboard;
+import com.example.basicsprgboot2025.service.SboardService;
+import com.example.basicsprgboot2025.service.SboardService2;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,29 +14,31 @@ import java.util.Map;
 @RequestMapping("/api/sboard")
 public class SboardRestCtrl {
     final SboardService sboardService;
-    SboardRestCtrl(SboardService sboardService){
+    final SboardService2 sboardService2;
+    SboardRestCtrl(SboardService sboardService, SboardService2 sboardService2){
         this.sboardService = sboardService;
+        this.sboardService2 = sboardService2;
     }
     @RequestMapping("/create")
     public Map<String,Object> create (@RequestParam Map<String,Object> param){
-        return sboardService.create(param);
+        return sboardService2.create(param);
     }
     @RequestMapping("/update")
     public void update (Map<String,Object> param) {
-        sboardService.update(param);
+        sboardService2.update(param);
 
     }
     @RequestMapping("/delete")
     public void delete (int id) {
-        sboardService.delete(id);
+        sboardService2.delete(id);
     }
     @RequestMapping("/detail")
-    public Map<String,Object> detail (int id) {
-        return sboardService.detail(id);
+    public Sboard detail (int id) {
+        return sboardService2.detail(id);
     }
     @RequestMapping("/list")
-    public List<Map<String,Object>> list(String title){
-        return sboardService.list(title);
+    public List<Sboard> list(){
+        return sboardService2.list();
     }
 
 }

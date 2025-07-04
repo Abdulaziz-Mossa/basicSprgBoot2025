@@ -1,6 +1,6 @@
-package com.example.basicsprgboot2025.controller.service.impl;
+package com.example.basicsprgboot2025.service.impl;
 
-import com.example.basicsprgboot2025.controller.service.SboardService;
+import com.example.basicsprgboot2025.service.SboardService;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

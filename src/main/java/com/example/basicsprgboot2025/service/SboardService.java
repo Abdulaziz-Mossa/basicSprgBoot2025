@@ -1,4 +1,4 @@
-package com.example.basicsprgboot2025.controller.service;
+package com.example.basicsprgboot2025.service;
 
 import org.springframework.stereotype.Service;
 
